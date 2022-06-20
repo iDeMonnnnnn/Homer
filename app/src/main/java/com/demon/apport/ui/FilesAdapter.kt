@@ -22,29 +22,25 @@ import java.io.File
  * @email liu_demon@qq.com
  * @desc
  */
-class FilesAdapter constructor(val mApps: MutableList<InfoModel> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FilesAdapter constructor(val mList: MutableList<InfoModel> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var mContext: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         mContext = parent.context
         val inflater = LayoutInflater.from(parent.context)
-        return if (viewType == 1) {
-            val view = inflater.inflate(R.layout.empty_view, parent, false)
-            EmptyViewHolder(view)
-        } else {
-            MyViewHolder(inflater.inflate(R.layout.layout_book_item, parent, false))
+        return when (viewType) {
+            -1 -> EmptyViewHolder(inflater.inflate(R.layout.empty_view, parent, false))
+            1 -> ApkViewHolder(inflater.inflate(R.layout.item_apk, parent, false))
+            else -> FileViewHolder(inflater.inflate(R.layout.item_file, parent, false))
         }
     }
 
     var installAllowed = false
-    override fun onBindViewHolder(holder1: RecyclerView.ViewHolder, position: Int) {
-        if (holder1 is MyViewHolder) {
-            val holder = holder1
-            val infoModel = mApps[position]
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ApkViewHolder) {
+            val infoModel = mList[position]
             holder.mTvAppName.text = infoModel.name + "(v" + infoModel.version + ")"
-
-//            holder.mTvAppInstall.setText(infoModel.getName());
             holder.mTvAppSize.text = infoModel.size
             holder.mTvAppPath.text = infoModel.path
             holder.ivIcon.setImageDrawable(infoModel.icon)
@@ -70,16 +66,42 @@ class FilesAdapter constructor(val mApps: MutableList<InfoModel> = mutableListOf
             } else {
                 holder.mTvAppDelete.visibility = View.GONE
             }
+        } else if (holder is FileViewHolder) {
+            val infoModel = mList[position]
+            holder.mTvAppName.text = infoModel.name
+            holder.mTvAppSize.text = infoModel.size
+            holder.mTvAppPath.text = infoModel.path
+            holder.ivIcon.setImageDrawable(infoModel.icon)
+            holder.mTvAppDelete.setOnClickListener { FileUtils.delete(mContext, infoModel.packageName) }
         }
+    }
+
+
+    override fun getItemCount(): Int {
+        return if (mList.size > 0) mList.size else 1
     }
 
     internal inner class EmptyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    override fun getItemCount(): Int {
-        return if (mApps.size > 0) mApps.size else 1
+    internal inner class FileViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var mTvAppName: TextView
+        var mTvAppSize: TextView
+        var mTvAppInstall: TextView
+        var mTvAppDelete: TextView
+        var mTvAppPath: TextView
+        var ivIcon: ImageView
+
+        init {
+            mTvAppName = view.findViewById<View>(R.id.tv_name) as TextView
+            mTvAppSize = view.findViewById<View>(R.id.tv_size) as TextView
+            mTvAppInstall = view.findViewById<View>(R.id.tv_install) as TextView
+            mTvAppPath = view.findViewById<View>(R.id.tv_path) as TextView
+            mTvAppDelete = view.findViewById<View>(R.id.tv_delete) as TextView
+            ivIcon = view.findViewById<View>(R.id.iv_icon) as ImageView
+        }
     }
 
-    internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    internal inner class ApkViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var mTvAppName: TextView
         var mTvAppSize: TextView
         var mTvAppInstall: TextView
@@ -98,8 +120,10 @@ class FilesAdapter constructor(val mApps: MutableList<InfoModel> = mutableListOf
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (mApps.size == 0) {
-            1
-        } else super.getItemViewType(position)
+        return if (mList.size == 0) {
+            -1
+        } else {
+            mList[position].type
+        }
     }
 }

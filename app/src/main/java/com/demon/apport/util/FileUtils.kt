@@ -77,7 +77,7 @@ object FileUtils {
             if (icon == null) {
                 icon = getIconFromPackageName(packageName, context) // 获得应用程序图标
             }
-            infoModel = InfoModel()
+            infoModel = InfoModel(1)
             infoModel.name = appName
             infoModel.packageName = packageName
             infoModel.path = archiveFilePath
