@@ -17,6 +17,7 @@ import com.demon.apport.data.Constants
 import com.demon.apport.data.InfoModel
 import com.demon.apport.databinding.ActivityMainBinding
 import com.demon.apport.receiver.WifiReceiver
+import com.demon.apport.service.WebHelper
 import com.demon.apport.service.WebService
 import com.demon.apport.util.FileUtils
 import com.demon.qfsolution.utils.getExternalOrFilesDir
@@ -91,9 +92,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         LiveEventBus.get<NetworkInfo.State>(Constants.WIFI_CONNECT_CHANGE_EVENT).observe(this) {
-            if (it.ordinal == 1) {
-                WebService.start(this)
+            when (it.ordinal) {
+                1 -> {
+                    WebService.start(this)
+                }
+                4 -> {
+                    WebService.stop(this)
+                }
             }
+
         }
     }
 
