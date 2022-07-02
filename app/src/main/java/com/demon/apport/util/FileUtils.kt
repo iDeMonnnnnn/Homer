@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.provider.Settings
 import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.util.Log
@@ -18,7 +19,10 @@ import androidx.core.content.FileProvider
 import com.demon.apport.App
 import com.demon.apport.data.Constants
 import com.demon.apport.data.InfoModel
+import com.demon.qfsolution.utils.getExtensionByUri
 import com.demon.qfsolution.utils.getExternalOrFilesDir
+import com.demon.qfsolution.utils.getMimeTypeByFileName
+import com.jeremyliao.liveeventbus.LiveEventBus
 import java.io.File
 import java.text.DecimalFormat
 
@@ -57,6 +61,29 @@ object FileUtils {
         return list
     }
 
+    fun openFileorAPk(mContext: Context, infoModel: InfoModel) {
+        if (infoModel.isApk()) {
+            installAPk(mContext, infoModel.path)
+        } else {
+            openFile(mContext, File(infoModel.path))
+        }
+    }
+
+    fun installAPk(mContext: Context, path: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val installAllowed = mContext.packageManager.canRequestPackageInstalls()
+            if (installAllowed) {
+                openFile(mContext, File(path))
+            } else {
+                val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:${mContext.packageName}"))
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                mContext.startActivity(intent)
+            }
+        } else {
+            openFile(mContext, File(path))
+        }
+    }
+
 
     fun getApkInfo(context: Context, apk: File): InfoModel? {
         var infoModel: InfoModel? = null
@@ -79,12 +106,10 @@ object FileUtils {
             }
             infoModel = InfoModel(1)
             infoModel.name = appName
-            infoModel.packageName = packageName
             infoModel.path = archiveFilePath
             infoModel.size = getFileSize(apk.length())
             infoModel.version = version
             infoModel.icon = icon
-            infoModel.isInstalled = isAvilible(context, packageName)
         }
         return infoModel
     }
@@ -171,26 +196,55 @@ object FileUtils {
     }
 
     //安装
-    fun installApkFile(context: Context, file: File) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        //兼容7.0
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            val contentUri = FileProvider.getUriForFile(context, context.packageName + ".fileprovider", file)
-            intent.setDataAndType(contentUri, "application/vnd.android.package-archive")
-        } else {
-            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive")
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-        if (context.packageManager.queryIntentActivities(intent, 0).size > 0) {
-            context.startActivity(intent)
+    fun openFile(context: Context, file: File) {
+        runCatching {
+            val intent = Intent(Intent.ACTION_VIEW)
+            //兼容7.0
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                val contentUri = FileProvider.getUriForFile(context, context.packageName + ".fileProvider", file)
+                intent.setDataAndType(contentUri, file.name.getMimeTypeByFileName())
+            } else {
+                intent.setDataAndType(Uri.fromFile(file), file.name.getMimeTypeByFileName())
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+
+            if (context.packageManager.queryIntentActivities(intent, 0).size > 0) {
+                context.startActivity(intent)
+            } else {
+                "没有可以打开此文件的应用!".toast()
+            }
+        }.onFailure {
+            it.printStackTrace()
+            "没有可以打开此文件的应用!".toast()
         }
     }
 
     //卸载
-    fun delete(context: Context, packageName: String?) {
+    fun uninstall(context: Context, packageName: String?) {
         val uri = Uri.fromParts("package", packageName, null)
         val intent = Intent(Intent.ACTION_DELETE, uri)
         context.startActivity(intent)
+    }
+
+    //删除所有文件
+    fun delete(path: String) {
+        val file = File(path)
+        file.deleteOnExit()
+        LiveEventBus.get<Int>(Constants.LOAD_BOOK_LIST).post(0)
+    }
+
+    //删除所有文件
+    fun deleteAll(context: Context) {
+        val dir = context.getExternalOrFilesDir(Environment.DIRECTORY_DCIM)
+        if (dir.exists() && dir.isDirectory) {
+            val fileNames = dir.listFiles()
+            if (fileNames != null) {
+                for (fileName in fileNames) {
+                    fileName.delete()
+                }
+            }
+        }
+        LiveEventBus.get<Int>(Constants.LOAD_BOOK_LIST).post(0)
     }
 }

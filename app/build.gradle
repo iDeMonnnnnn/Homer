@@ -16,10 +16,23 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        sing {
+            storeFile file('demon.jks')
+            storePassword '123456'
+            keyAlias = 'key'
+            keyPassword '123456'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sing
+        }
+        debug {
+            signingConfig signingConfigs.sing
         }
     }
 

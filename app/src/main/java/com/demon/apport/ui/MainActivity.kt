@@ -122,19 +122,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //删除所有文件
-    private fun deleteAll() {
-        val dir = getExternalOrFilesDir(Environment.DIRECTORY_DCIM)
-        if (dir.exists() && dir.isDirectory) {
-            val fileNames = dir.listFiles()
-            if (fileNames != null) {
-                for (fileName in fileNames) {
-                    fileName.delete()
-                }
-            }
-        }
-        LiveEventBus.get<Int>(Constants.LOAD_BOOK_LIST).post(0)
-    }
 
 
 }

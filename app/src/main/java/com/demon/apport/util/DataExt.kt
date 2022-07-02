@@ -3,6 +3,8 @@ package com.demon.apport.util
 import android.content.res.Resources
 import android.util.Log
 import android.util.TypedValue
+import android.widget.Toast
+import com.demon.apport.App
 
 /**
  * @author DeMonnnnnn
@@ -41,4 +43,9 @@ inline fun <T> tryCatch(default: T, block: () -> T): T {
         Log.e("TryExt", "tryCatch: ", e)
         default
     }
+}
+
+fun String?.toast() {
+    this ?: return
+    Toast.makeText(App.appContext, this, Toast.LENGTH_SHORT).show()
 }
