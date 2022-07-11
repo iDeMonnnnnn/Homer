@@ -35,14 +35,4 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <Button
-        android:id="@+id/fab"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:background="@color/blue_500"
-        app:icon="@drawable/ic_wifi" />
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

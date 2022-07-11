@@ -31,8 +31,13 @@ object LogUtils {
         nowDay = SimpleDateFormat("yyyy-MM-dd").format(Date())
     }
 
+    fun wtf(tag: String, msg: String, error: Throwable) {
+        Log.e(tag, msg, error)
+        wtf(tag, Log.getStackTraceString(error))
+    }
+
     fun wtf(tag: String, msg: String) {
-        Log.i(tag, "wtf: $msg")
+        Log.i(tag, msg)
         scopeIO.launch {
             val mContext = App.appContext
             val logFile = File(getTodayLog())

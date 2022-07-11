@@ -57,11 +57,6 @@ class MainActivity : AppCompatActivity() {
 
         initEventBus()
         initRecyclerView()
-
-        bind.fab.setOnClickListener {
-            LogUtils.wtf(Tag, "Server.isRunning=${WebHelper.instance.isConnected()}")
-            WifiStateDialog().showAllowingState(supportFragmentManager)
-        }
     }
 
 
@@ -71,6 +66,10 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, LogActivity::class.java)
                 intent.putExtra("path", LogUtils.getTodayLog())
                 startActivity(intent)
+            }
+            R.id.menu_wifi -> {
+                LogUtils.wtf(Tag, "Server.isRunning=${WebHelper.instance.isConnected()}")
+                WifiStateDialog().showAllowingState(supportFragmentManager)
             }
         }
         return super.onOptionsItemSelected(item)

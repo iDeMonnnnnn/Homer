@@ -62,7 +62,7 @@ class WifiStateDialog : DialogFragment() {
             startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
         }
 
-        if (WifiUtils.getNetState(requireContext())) {
+        if (WifiUtils.getNetState()) {
             onWifiConnected()
         } else {
             onWifiDisconnected()
@@ -112,7 +112,7 @@ class WifiStateDialog : DialogFragment() {
             mImgLanState.setImageResource(R.drawable.shared_wifi_enable)
             mTxtStateHint.setText(R.string.pls_input_the_following_address_in_pc_browser)
             mTxtAddress.visibility = View.VISIBLE
-            val ipAddr = WifiUtils.getWifiIp(requireContext())
+            val ipAddr = WifiUtils.getIp()
             mTxtAddress.text = String.format(requireContext().getString(R.string.http_address), ipAddr, Constants.HTTP_PORT)
             mButtonSplitLine.visibility = View.GONE
             mBtnWifiSettings.visibility = View.GONE

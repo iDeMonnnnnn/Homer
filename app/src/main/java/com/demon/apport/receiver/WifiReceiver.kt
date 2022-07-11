@@ -18,7 +18,7 @@ class WifiReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         LogUtils.wtf(Tag, "onReceive: ${intent.action}")
         if (WifiManager.NETWORK_STATE_CHANGED_ACTION == intent.action) {
-            val flag = WifiUtils.getNetState(App.appContext)
+            val flag = WifiUtils.getNetState()
             LiveEventBus.get<Boolean>(Constants.WIFI_CONNECT_CHANGE_EVENT).post(flag)
         }
     }

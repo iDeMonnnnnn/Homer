@@ -32,7 +32,7 @@ class WebService : Service() {
         val action = intent.action
         LogUtils.wtf(Tag, "onStartCommand: $action")
         if (ACTION_START_WEB_SERVICE == action) {
-            val ipAddr = WifiUtils.getWifiIp(this)
+            val ipAddr = WifiUtils.getIp()
             LogUtils.wtf(Tag, "device ip=$ipAddr")
             WebHelper.instance.startServer(this)
         } else if (ACTION_STOP_WEB_SERVICE == action) {
