@@ -1,5 +1,6 @@
 package com.demon.apport.ui
 
+import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -20,6 +21,8 @@ import com.demon.apport.receiver.WifiReceiver
 import com.demon.apport.service.WebHelper
 import com.demon.apport.service.WebService
 import com.demon.apport.util.FileUtils
+import com.demon.apport.util.LogUtils
+import com.demon.apport.util.Tag
 import com.demon.qfsolution.utils.getExternalOrFilesDir
 import com.jeremyliao.liveeventbus.LiveEventBus
 
@@ -56,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
 
         bind.fab.setOnClickListener {
+            LogUtils.wtf(Tag, "Server.isRunning=${WebHelper.instance.isConnected()}")
             WifiStateDialog().showAllowingState(supportFragmentManager)
         }
     }
@@ -63,7 +67,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
+            R.id.menu_setting -> {
+                val intent = Intent(this@MainActivity, LogActivity::class.java)
+                intent.putExtra("path", LogUtils.getTodayLog())
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -120,8 +128,6 @@ class MainActivity : AppCompatActivity() {
             bind.refreshLayout.setOnRefreshListener { LiveEventBus.get<Int>(Constants.LOAD_BOOK_LIST).post(0) }
         }
     }
-
-
 
 
 }

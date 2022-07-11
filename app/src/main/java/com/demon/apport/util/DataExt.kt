@@ -5,6 +5,9 @@ import android.util.Log
 import android.util.TypedValue
 import android.widget.Toast
 import com.demon.apport.App
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 
 /**
  * @author DeMonnnnnn
@@ -12,6 +15,13 @@ import com.demon.apport.App
  * @email liu_demon@qq.com
  * @desc
  */
+inline val <T : Any> T.Tag: String
+    get() = this.javaClass.simpleName
+
+val scopeMain = CoroutineScope((SupervisorJob() + Dispatchers.Main))
+
+val scopeIO = CoroutineScope((SupervisorJob() + Dispatchers.IO))
+
 val Any.dp2px
     get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, "$this".parseFloat(), Resources.getSystem().displayMetrics).toInt()
 

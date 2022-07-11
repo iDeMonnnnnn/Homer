@@ -59,4 +59,5 @@ dependencies {
     implementation "com.koushikdutta.async:androidasync:2.+"
     implementation 'com.github.iDeMonnnnnn:QFsolution:1.1.8'
     implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02"
 }

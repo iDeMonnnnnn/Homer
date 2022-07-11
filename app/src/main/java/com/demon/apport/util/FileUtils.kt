@@ -19,11 +19,12 @@ import androidx.core.content.FileProvider
 import com.demon.apport.App
 import com.demon.apport.data.Constants
 import com.demon.apport.data.InfoModel
-import com.demon.qfsolution.utils.getExtensionByUri
 import com.demon.qfsolution.utils.getExternalOrFilesDir
 import com.demon.qfsolution.utils.getMimeTypeByFileName
 import com.jeremyliao.liveeventbus.LiveEventBus
 import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
 import java.text.DecimalFormat
 
 /**
@@ -246,5 +247,54 @@ object FileUtils {
             }
         }
         LiveEventBus.get<Int>(Constants.LOAD_BOOK_LIST).post(0)
+    }
+
+
+    /**
+     * 往文件中写入字符串
+     *
+     * @param fileName 文件保存路径
+     * @param content  文件内容
+     * @param append   是否追加
+     */
+    @JvmStatic
+    fun writeTxt(fileName: String?, content: String?, append: Boolean) {
+        try {
+            val file = File(fileName)
+            //构造函数中的第二个参数true表示以追加形式写文件
+            val fw = FileWriter(file.absolutePath, append)
+            fw.write(content)
+            fw.flush()
+            fw.close()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun writeTxt(fileName: String?, content: String?) {
+        writeTxt(fileName, content, false)
+    }
+
+    /**
+     * 读取文件中的字符串
+     *
+     * @param fileName
+     * @return
+     */
+    @JvmStatic
+    fun readText(fileName: String?): String? {
+        val sb = StringBuilder()
+        try {
+            val fr = FileReader(fileName)
+            val buf = CharArray(1024)
+            var num = 0
+            while (fr.read(buf).also { num = it } != -1) {
+                sb.append(String(buf, 0, num))
+            }
+            fr.close()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return sb.toString()
     }
 }

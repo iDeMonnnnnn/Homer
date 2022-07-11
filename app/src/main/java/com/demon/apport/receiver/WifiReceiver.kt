@@ -8,6 +8,7 @@ import android.os.Parcelable
 import android.net.NetworkInfo
 import android.util.Log
 import com.demon.apport.data.Constants
+import com.demon.apport.util.LogUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 
 class WifiReceiver : BroadcastReceiver() {
@@ -18,7 +19,6 @@ class WifiReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        Log.i(TAG, "onReceive: ${intent.action}")
         if (WifiManager.NETWORK_STATE_CHANGED_ACTION == intent.action) {
             val parcelableExtra = intent
                 .getParcelableExtra<Parcelable>(WifiManager.EXTRA_NETWORK_INFO)
@@ -26,6 +26,7 @@ class WifiReceiver : BroadcastReceiver() {
                 val networkInfo = parcelableExtra as NetworkInfo
                 //1.已连接，4断开连接，0连接中
                 state = networkInfo.state.ordinal
+                LogUtils.wtf(TAG, "onReceive: ${intent.action}=$state")
                 LiveEventBus.get<NetworkInfo.State>(Constants.WIFI_CONNECT_CHANGE_EVENT).post(networkInfo.state)
             }
         }

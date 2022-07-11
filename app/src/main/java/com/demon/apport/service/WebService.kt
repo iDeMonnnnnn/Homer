@@ -9,7 +9,10 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.demon.apport.service.WebService
+import com.demon.apport.util.LogUtils
 import com.demon.apport.util.NotificationUtils
+import com.demon.apport.util.Tag
+import com.demon.apport.util.WifiUtils
 
 class WebService : Service() {
 
@@ -27,7 +30,10 @@ class WebService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val action = intent.action
+        LogUtils.wtf(Tag, "onStartCommand: $action")
         if (ACTION_START_WEB_SERVICE == action) {
+            val ipAddr = WifiUtils.getWifiIp(this)
+            LogUtils.wtf(Tag, "device ip=$ipAddr")
             WebHelper.instance.startServer(this)
         } else if (ACTION_STOP_WEB_SERVICE == action) {
             WebHelper.instance.stopService()
