@@ -72,7 +72,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:textColor="@color/blue_500" />
 
         <View
             android:id="@+id/mButtonSplitLine"
@@ -86,7 +87,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:clickable="true"
             android:gravity="center"
             android:text="@string/set_network"
             android:textColor="@color/colorAccent" />

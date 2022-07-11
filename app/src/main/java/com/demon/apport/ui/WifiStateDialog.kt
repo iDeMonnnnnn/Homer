@@ -62,17 +62,20 @@ class WifiStateDialog : DialogFragment() {
             startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
         }
 
-        LiveEventBus.get<NetworkInfo.State>(Constants.WIFI_CONNECT_CHANGE_EVENT).observe(this) {
-            changeState(it.ordinal)
+        if (WifiUtils.getNetState(requireContext())) {
+            onWifiConnected()
+        } else {
+            onWifiDisconnected()
+        }
+
+        LiveEventBus.get<Boolean>(Constants.WIFI_CONNECT_CHANGE_EVENT).observe(this) {
+            changeState(it)
         }
     }
 
-    private fun changeState(state: Int) {
-        when (state) {
-            0 -> onWifiConnecting()
-            1 -> onWifiConnected()
-            4 -> onWifiDisconnected()
-        }
+    private fun changeState(state: Boolean) {
+        if (state) onWifiConnected()
+        else onWifiDisconnected()
     }
 
     private fun onWifiDisconnected() {

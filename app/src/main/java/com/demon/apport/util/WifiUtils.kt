@@ -28,14 +28,15 @@ object WifiUtils {
      * 有可用的网络
      */
     fun getNetState(context: Context): Boolean {
+        var flag = false
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netInfo = manager.allNetworkInfo
         for (info in netInfo) {
             LogUtils.wtf(Tag, "getNetState: ${info.typeName}=${info.isConnected}")
             if (info.isConnected) {
-                return true
+                flag = true
             }
         }
-        return false
+        return flag
     }
 }

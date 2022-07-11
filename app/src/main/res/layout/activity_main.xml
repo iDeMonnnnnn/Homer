@@ -35,16 +35,13 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/fab"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/blue_500"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        app:cornerRadius="35dp"
+        android:background="@color/blue_500"
         app:icon="@drawable/ic_wifi" />
 
 

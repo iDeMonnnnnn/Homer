@@ -231,7 +231,7 @@ object FileUtils {
     //删除所有文件
     fun delete(path: String) {
         val file = File(path)
-        file.deleteOnExit()
+        if (file.exists()) file.delete()
         LiveEventBus.get<Int>(Constants.LOAD_BOOK_LIST).post(0)
     }
 
