@@ -62,7 +62,6 @@ class WifiStateDialog : DialogFragment() {
             startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
         }
 
-        changeState(WifiReceiver.state)
         LiveEventBus.get<NetworkInfo.State>(Constants.WIFI_CONNECT_CHANGE_EVENT).observe(this) {
             changeState(it.ordinal)
         }

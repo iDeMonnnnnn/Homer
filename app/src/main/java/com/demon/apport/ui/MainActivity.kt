@@ -99,16 +99,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        LiveEventBus.get<NetworkInfo.State>(Constants.WIFI_CONNECT_CHANGE_EVENT).observe(this) {
-            when (it.ordinal) {
-                1 -> {
-                    WebService.start(this)
-                }
-                4 -> {
-                    WebService.stop(this)
-                }
+        LiveEventBus.get<Boolean>(Constants.WIFI_CONNECT_CHANGE_EVENT).observe(this) {
+            if (it) {
+                WebService.start(this)
+            } else {
+                WebService.stop(this)
             }
-
         }
     }
 

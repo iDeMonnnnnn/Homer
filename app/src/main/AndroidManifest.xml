@@ -27,9 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.LogActivity"
-            android:label="Log" />
+        <activity android:name=".ui.LogActivity" />
 
         <service
             android:name=".service.WebService"

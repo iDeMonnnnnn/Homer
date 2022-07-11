@@ -1,44 +1,41 @@
-package com.demon.apport.util;
+package com.demon.apport.util
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
+import android.content.Context
+import android.net.wifi.WifiManager
+import android.net.wifi.WifiInfo
+import com.demon.apport.util.WifiUtils
+import android.net.NetworkInfo
+import android.net.ConnectivityManager
 
 /**
  * Created by masel on 2016/10/10.
  */
+object WifiUtils {
 
-public class WifiUtils {
-
-    public static String getWifiIp(Context context) {
-        WifiManager wifimanager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInfo = wifimanager.getConnectionInfo();
-        if (wifiInfo != null) {
-            return intToIp(wifiInfo.getIpAddress());
-        }
-        return null;
+    fun getWifiIp(context: Context): String? {
+        val wifimanager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val wifiInfo = wifimanager.connectionInfo
+        return if (wifiInfo != null) {
+            intToIp(wifiInfo.ipAddress)
+        } else null
     }
 
-    private static String intToIp(int i) {
-        return (i & 0xFF) + "." + ((i >> 8) & 0xFF) + "." + ((i >> 16) & 0xFF) + "." + ((i >> 24) & 0xFF);
+    private fun intToIp(i: Int): String {
+        return (i and 0xFF).toString() + "." + (i shr 8 and 0xFF) + "." + (i shr 16 and 0xFF) + "." + (i shr 24 and 0xFF)
     }
 
-    public static int getWifiState(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        if (wifiManager != null) {
-            return wifiManager.getWifiState();
+    /**
+     * 有可用的网络
+     */
+    fun getNetState(context: Context): Boolean {
+        val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netInfo = manager.allNetworkInfo
+        for (info in netInfo) {
+            LogUtils.wtf(Tag, "getNetState: ${info.typeName}=${info.isConnected}")
+            if (info.isConnected) {
+                return true
+            }
         }
-        return WifiManager.WIFI_STATE_DISABLED;
-    }
-
-    public static NetworkInfo.State getWifiConnectState(Context context) {
-        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo mWiFiNetworkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        if (mWiFiNetworkInfo != null) {
-            return mWiFiNetworkInfo.getState();
-        }
-        return NetworkInfo.State.DISCONNECTED;
+        return false
     }
 }
