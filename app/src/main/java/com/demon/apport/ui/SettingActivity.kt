@@ -12,6 +12,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
 
 
         binding.run {
+            tvPath.setOnClickListener {
+                val intent = Intent(this@SettingActivity, LogListActivity::class.java)
+                startActivity(intent)
+            }
             tvLog.setOnClickListener {
                 val intent = Intent(this@SettingActivity, LogListActivity::class.java)
                 startActivity(intent)

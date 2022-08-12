@@ -21,9 +21,6 @@ import java.lang.reflect.ParameterizedType
 inline val <T : Any> T.Tag: String
     get() = this.javaClass.simpleName
 
-val scopeMain = CoroutineScope((SupervisorJob() + Dispatchers.Main))
-
-val scopeIO = CoroutineScope((SupervisorJob() + Dispatchers.IO))
 
 val Any.dp2px
     get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, "$this".parseFloat(), Resources.getSystem().displayMetrics).toInt()

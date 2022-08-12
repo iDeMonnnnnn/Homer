@@ -2,7 +2,9 @@ package com.demon.apport
 
 import android.app.Application
 import android.content.Context
+import com.demon.apport.util.LogUtils
 import com.demon.qfsolution.QFHelper
+import com.tencent.mmkv.MMKV
 
 /**
  * @author DeMonnnnnn
@@ -12,6 +14,7 @@ import com.demon.qfsolution.QFHelper
  */
 class App : Application() {
     companion object {
+        private const val TAG = "App"
         lateinit var appContext: Context
     }
 
@@ -19,6 +22,8 @@ class App : Application() {
         super.onCreate()
         appContext = this.applicationContext
 
+        val rootDir = MMKV.initialize(this)
+        LogUtils.wtf(TAG, "onCreate:  $rootDir")
         QFHelper.init(this, "fileProvider")
     }
 }

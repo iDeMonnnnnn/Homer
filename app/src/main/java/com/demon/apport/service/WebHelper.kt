@@ -26,6 +26,9 @@ import com.demon.apport.App
 import android.os.Environment
 import android.util.Log
 import com.demon.apport.data.Constants
+import com.demon.apport.util.get
+import com.demon.apport.util.mmkv
+import com.demon.qfsolution.utils.getExternalOrFilesDirPath
 import com.koushikdutta.async.callback.DataCallback
 import com.koushikdutta.async.http.body.Part
 import java.io.*
@@ -44,13 +47,14 @@ class WebHelper private constructor() {
     private val fileUploadHolder: FileUploadHolder
     private val server: AsyncHttpServer?
     private val mAsyncServer: AsyncServer?
-    private val dir: File
+    var dir: File
 
     init {
         fileUploadHolder = FileUploadHolder()
         server = AsyncHttpServer()
         mAsyncServer = AsyncServer()
-        dir = App.appContext.getExternalOrFilesDir(Environment.DIRECTORY_DCIM)
+        val def: String = App.appContext.getExternalOrFilesDirPath(Environment.DIRECTORY_DCIM)
+        dir = File(mmkv.get(Constants.MMKV_STORAGE_PATH, def))
     }
 
     fun startServer(context: Context) {
