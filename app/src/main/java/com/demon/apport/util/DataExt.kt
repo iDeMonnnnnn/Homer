@@ -3,11 +3,14 @@ package com.demon.apport.util
 import android.content.res.Resources
 import android.util.Log
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.viewbinding.ViewBinding
 import com.demon.apport.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import java.lang.reflect.ParameterizedType
 
 /**
  * @author DeMonnnnnn
@@ -58,4 +61,15 @@ inline fun <T> tryCatch(default: T, block: () -> T): T {
 fun String?.toast() {
     this ?: return
     Toast.makeText(App.appContext, this, Toast.LENGTH_SHORT).show()
+}
+
+/**
+ * 反射执行ViewBinding的inflate静态方法，主要在Activity中使用
+ *
+ * @param inflater LayoutInflater参数
+ * @param index 表示第几个泛型
+ */
+inline fun <VB : ViewBinding> Any.inflateViewBinding(inflater: LayoutInflater, index: Int = 0): VB {
+    val cla = (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[index] as Class<VB>
+    return cla.getMethod("inflate", LayoutInflater::class.java).invoke(null, inflater) as VB
 }

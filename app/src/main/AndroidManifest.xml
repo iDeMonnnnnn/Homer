@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeMonApport">
         <activity
+            android:name=".ui.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -28,6 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.LogActivity" />
+        <activity android:name=".ui.LogListActivity" />
 
         <service
             android:name=".service.WebService"

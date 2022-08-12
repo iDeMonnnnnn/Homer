@@ -13,11 +13,20 @@
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/layout/item_file.xml" value="0.33" />
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/menu/item_menu.xml" value="0.35208333333333336" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1985" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/drawable/option_background.xml" value="0.2285" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/drawable/shape_red_bg_frame10.xml" value="0.2285" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/activity_log.xml" value="0.37395833333333334" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/activity_log_list.xml" value="0.24256756756756756" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/activity_setting.xml" value="0.24013377926421406" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/activity_setting2.xml" value="0.37395833333333334" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/content_main.xml" value="0.35885416666666664" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/empty_view.xml" value="0.325" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/fragment_wifi_state.xml" value="0.37447916666666664" />
-        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/item_file.xml" value="0.37447916666666664" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/include_toobar.xml" value="0.3682051282051282" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/include_toolbar.xml" value="0.37395833333333334" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/item_file.xml" value="0.22" />
+        <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/item_log.xml" value="0.24256756756756756" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/layout_book_item.xml" value="0.35885416666666664" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/layout/layout_popup_menu_dialog.xml" value="0.3129528985507246" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/menu/item_menu.xml" value="0.325" />

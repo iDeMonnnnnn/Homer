@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DeMonApport</string>
+    <string name="app_name">Homer</string>
     <string name="notification_desc">正在运行, 确保您可以正常传输文件。</string>
     <string name="wlan_enabled">WLAN服务已开启</string>
     <string name="wlan_disabled">WLAN服务未开启</string>

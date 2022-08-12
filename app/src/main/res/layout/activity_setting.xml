@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    tools:context=".ui.SettingActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <TextView
+        android:id="@+id/tvPath"
+        style="@style/TextView_Menu"
+        android:text="存储路径"
+        app:drawableStartCompat="@drawable/icon_sdcard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tvLog"
+        style="@style/TextView_Menu"
+        android:layout_marginTop="0.5dp"
+        android:text="日志"
+        app:drawableStartCompat="@drawable/icon_log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPath" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

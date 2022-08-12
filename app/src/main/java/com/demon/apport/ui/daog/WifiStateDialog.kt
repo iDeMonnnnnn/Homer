@@ -1,20 +1,16 @@
-package com.demon.apport.ui
+package com.demon.apport.ui.daog
 
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.demon.apport.R
 import com.demon.apport.data.Constants
 import com.demon.apport.databinding.FragmentWifiStateBinding
-import com.demon.apport.receiver.WifiReceiver
 import com.demon.apport.util.WifiUtils
 import com.demon.apport.util.dp2px
 import com.jeremyliao.liveeventbus.LiveEventBus

@@ -1,9 +1,10 @@
 package com.demon.apport.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
+import com.demon.apport.base.BaseActivity
 import com.demon.apport.databinding.ActivityLogBinding
 import com.demon.apport.util.FileUtils
+import java.io.File
 
 /**
  * @author DeMon
@@ -11,20 +12,14 @@ import com.demon.apport.util.FileUtils
  * E-mail idemon_liu@qq.com
  * Desc:
  */
-class LogActivity : AppCompatActivity() {
+class LogActivity : BaseActivity<ActivityLogBinding>() {
 
-    private lateinit var binding: ActivityLogBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityLogBinding.inflate(layoutInflater)
-
-        setContentView(binding.root)
+    override fun initData() {
 
         val path = intent.getStringExtra("path")
-
+        setToolbar(File(path).name)
+        Log.i(TAG, "initData: $path")
         binding.tvContent.text = FileUtils.readText(path)
-
     }
 }

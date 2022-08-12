@@ -89,9 +89,11 @@ object LogUtils {
      * @param ctx
      * @return
      */
-    fun getLogFiles(ctx: Context): MutableList<String> {
+    fun getLogFiles(ctx: Context): List<String> {
         val filesDir = File(getLogFilePath(ctx))
         val fileNames = filesDir.list() ?: arrayOf()
-        return fileNames.toMutableList()
+        return fileNames.toMutableList().map {
+            "${filesDir.absolutePath}/$it"
+        }
     }
 }
