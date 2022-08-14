@@ -22,6 +22,7 @@
         android:id="@+id/tvDelete"
         style="@style/TextView_Menu"
         android:text="删除全部"
+        android:layout_marginTop="0.5dp"
         app:drawableStartCompat="@drawable/icon_sdcard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

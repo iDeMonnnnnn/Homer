@@ -1,4 +1,4 @@
-package com.demon.apport.ui.daog
+package com.demon.apport.ui.dialog
 
 import android.content.Intent
 import android.graphics.Color

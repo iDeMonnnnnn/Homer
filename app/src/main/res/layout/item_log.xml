@@ -9,6 +9,7 @@
         android:id="@+id/tvText"
         style="@style/TextView_Menu"
         android:layout_marginTop="1dp"
+        android:background="@drawable/option_background"
         app:drawableStartCompat="@drawable/icon_log"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -15,7 +15,7 @@ import com.demon.apport.receiver.WifiReceiver
 import com.demon.apport.service.WebHelper
 import com.demon.apport.service.WebService
 import com.demon.apport.ui.adapter.FilesAdapter
-import com.demon.apport.ui.daog.WifiStateDialog
+import com.demon.apport.ui.dialog.WifiStateDialog
 import com.demon.apport.util.FileUtils
 import com.demon.apport.util.LogUtils
 import com.demon.apport.util.Tag
