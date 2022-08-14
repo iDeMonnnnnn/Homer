@@ -29,7 +29,6 @@ class LogListActivity : BaseActivity<ActivityLogListBinding>() {
     override fun initData() {
         setToolbar("日志")
         list.addAll(LogUtils.getLogFiles(this))
-        list.reverse()
         binding.rvData.adapter = adapter
     }
 
