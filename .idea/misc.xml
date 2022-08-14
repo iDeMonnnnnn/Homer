@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/drawable/option_background.xml" value="0.2515" />
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/drawable/shape_blue_bg_frame10.xml" value="0.2515" />
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/drawable/shape_common_bg_frame10.xml" value="0.2695" />
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/drawable/shape_red_bg_frame10.xml" value="0.215" />
@@ -14,6 +15,7 @@
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/layout/fragment_wifi_state.xml" value="0.35208333333333336" />
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/layout/item_apk.xml" value="0.35208333333333336" />
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/layout/item_file.xml" value="0.33" />
+        <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/layout/item_log.xml" value="0.35208333333333336" />
         <entry key="..\:/IT/CODE/DeMonApport/app/src/main/res/menu/item_menu.xml" value="0.35208333333333336" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1985" />
         <entry key="..\:/ITCode/Android/DeMonApport/app/src/main/res/drawable/option_background.xml" value="0.2285" />

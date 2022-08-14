@@ -8,6 +8,7 @@ import com.demon.apport.data.Constants
 import com.demon.apport.databinding.ActivitySettingBinding
 import com.demon.apport.util.FileUtils
 import com.demon.apport.util.LogUtils
+import com.demon.apport.util.get
 import com.demon.apport.util.mmkv
 import com.demon.qfsolution.utils.getExternalOrFilesDirPath
 import java.io.File

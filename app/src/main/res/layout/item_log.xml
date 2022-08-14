@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <Button
         android:id="@+id/tvText"
         style="@style/TextView_Menu"
         android:layout_marginTop="1dp"

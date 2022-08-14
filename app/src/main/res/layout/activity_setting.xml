@@ -9,7 +9,7 @@
 
     <include layout="@layout/include_toolbar" />
 
-    <TextView
+    <Button
         android:id="@+id/tvPath"
         style="@style/TextView_Menu"
         android:text="存储路径"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
+    <Button
         android:id="@+id/tvDelete"
         style="@style/TextView_Menu"
         android:text="删除全部"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPath" />
 
-    <TextView
+    <Button
         android:id="@+id/tvLog"
         style="@style/TextView_Menu"
         android:layout_marginTop="0.5dp"
