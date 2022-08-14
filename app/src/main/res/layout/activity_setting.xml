@@ -19,6 +19,15 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
+        android:id="@+id/tvDelete"
+        style="@style/TextView_Menu"
+        android:text="删除全部"
+        app:drawableStartCompat="@drawable/icon_sdcard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPath" />
+
+    <TextView
         android:id="@+id/tvLog"
         style="@style/TextView_Menu"
         android:layout_marginTop="0.5dp"
@@ -26,7 +35,7 @@
         app:drawableStartCompat="@drawable/icon_log"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPath" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDelete" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

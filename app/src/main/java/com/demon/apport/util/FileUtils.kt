@@ -228,7 +228,7 @@ object FileUtils {
         context.startActivity(intent)
     }
 
-    //删除所有文件
+    //删除单个文件
     fun delete(path: String) {
         val file = File(path)
         if (file.exists()) file.delete()
@@ -236,8 +236,8 @@ object FileUtils {
     }
 
     //删除所有文件
-    fun deleteAll(context: Context) {
-        val dir = context.getExternalOrFilesDir(Environment.DIRECTORY_DCIM)
+    fun deleteAll(path: String) {
+        val dir = File(path)
         if (dir.exists() && dir.isDirectory) {
             val fileNames = dir.listFiles()
             if (fileNames != null) {
