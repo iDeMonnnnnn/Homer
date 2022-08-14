@@ -74,7 +74,7 @@
         android:layout_gravity="bottom"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/shape_common_bg_frame10"
+        android:background="@drawable/shape_blue_bg_frame10"
         android:textColor="#ffffff"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
