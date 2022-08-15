@@ -19,6 +19,7 @@ import androidx.core.content.FileProvider
 import com.demon.apport.App
 import com.demon.apport.data.Constants
 import com.demon.apport.data.InfoModel
+import com.demon.apport.service.WebHelper
 import com.demon.qfsolution.utils.getExternalOrFilesDir
 import com.demon.qfsolution.utils.getMimeTypeByFileName
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -39,10 +40,12 @@ object FileUtils {
     //获取文件信息
     fun getAllFiles(context: Context): MutableList<InfoModel> {
         val list = mutableListOf<InfoModel>()
-        val dir = context.getExternalOrFilesDir(Environment.DIRECTORY_DCIM)
-        Log.i(TAG, "handleApk: ${dir.absoluteFile}")
+        val dir = WebHelper.instance.dir
+        Log.i(TAG, "getAllFiles: ${dir.absoluteFile}")
         if (dir.exists() && dir.isDirectory) {
-            val files = dir.listFiles()
+            val files = dir.listFiles()?.filter {
+                it.isFile
+            }
             if (files != null) {
                 for (file in files) {
                     if (file.absolutePath.endsWith(".apk", true)) {
