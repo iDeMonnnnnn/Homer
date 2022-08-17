@@ -1,6 +1,7 @@
 package com.demon.apport.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.demon.apport.R
 import com.demon.apport.data.InfoModel
 import com.demon.apport.util.FileUtils
+import com.demon.apport.util.loadImg
+import com.demon.qfsolution.utils.getExtensionByFileName
+import com.demon.qfsolution.utils.getMimeTypeByFileName
+import com.demon.qfsolution.utils.isImage
+import com.demon.qfsolution.utils.isVideo
 
 /**
  * @author DeMonnnnnn
@@ -45,7 +51,11 @@ class FilesAdapter constructor(val mList: MutableList<InfoModel> = mutableListOf
             }
             holder.mTvSize.text = infoModel.size
             holder.mTvPath.text = infoModel.path
-            holder.ivIcon.setImageDrawable(infoModel.icon)
+            if (infoModel.isApk()) {
+                holder.ivIcon.setImageDrawable(infoModel.icon)
+            } else {
+                holder.ivIcon.setImageResource(FileUtils.getIconByPath(infoModel.path))
+            }
             holder.mOpen.setOnClickListener {
                 FileUtils.openFileorAPk(mContext, infoModel)
             }

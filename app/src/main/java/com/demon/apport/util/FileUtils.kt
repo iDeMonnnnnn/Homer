@@ -17,11 +17,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.demon.apport.App
+import com.demon.apport.R
 import com.demon.apport.data.Constants
 import com.demon.apport.data.InfoModel
 import com.demon.apport.service.WebHelper
-import com.demon.qfsolution.utils.getExternalOrFilesDir
-import com.demon.qfsolution.utils.getMimeTypeByFileName
+import com.demon.qfsolution.utils.*
 import com.jeremyliao.liveeventbus.LiveEventBus
 import java.io.File
 import java.io.FileReader
@@ -50,6 +50,7 @@ object FileUtils {
                 for (file in files) {
                     if (file.absolutePath.endsWith(".apk", true)) {
                         getApkInfo(context, file)?.run {
+                            Log.i(TAG, "getAllFiles: $this")
                             list.add(this)
                         }
                     } else {
@@ -57,6 +58,7 @@ object FileUtils {
                         infoModel.name = file.name
                         infoModel.path = file.absolutePath
                         infoModel.size = getFileSize(file.length())
+                        Log.i(TAG, "getAllFiles: $infoModel")
                         list.add(infoModel)
                     }
                 }
@@ -285,7 +287,7 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun readText(fileName: String?): String? {
+    fun readText(fileName: String?): String {
         val sb = StringBuilder()
         try {
             val fr = FileReader(fileName)
@@ -299,5 +301,24 @@ object FileUtils {
             e.printStackTrace()
         }
         return sb.toString()
+    }
+
+
+    fun getIconByPath(path: String): Int {
+        val mimeType = File(path).name.getMimeTypeByFileName()
+        Log.i(TAG, "getIconByPath: $mimeType")
+        return when {
+            mimeType.isGif() -> R.drawable.icon_gif
+            mimeType.isImage() -> R.drawable.icon_img
+            mimeType.isVideo() -> R.drawable.icon_video
+            mimeType.isAudio() -> R.drawable.icon_audio
+            mimeType.isPdf() -> R.drawable.icon_pdf
+            mimeType.isTxt() -> R.drawable.icon_txt
+            mimeType.isExcel() -> R.drawable.icon_excel
+            mimeType.isPPT() -> R.drawable.icon_ppt
+            mimeType.isWord() -> R.drawable.icon_ppt
+            mimeType.isZip() -> R.drawable.icon_zip
+            else -> R.drawable.icon_other
+        }
     }
 }

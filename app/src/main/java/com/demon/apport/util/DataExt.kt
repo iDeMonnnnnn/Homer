@@ -4,9 +4,12 @@ import android.content.res.Resources
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.viewbinding.ViewBinding
+import com.bumptech.glide.Glide
 import com.demon.apport.App
+import com.demon.apport.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -69,4 +72,13 @@ fun String?.toast() {
 inline fun <VB : ViewBinding> Any.inflateViewBinding(inflater: LayoutInflater, index: Int = 0): VB {
     val cla = (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[index] as Class<VB>
     return cla.getMethod("inflate", LayoutInflater::class.java).invoke(null, inflater) as VB
+}
+
+
+fun ImageView.loadImg(path: String?) {
+    Glide.with(this)
+        .load(path)
+        .error(R.mipmap.icon_logo)
+        .placeholder(R.mipmap.icon_logo)
+        .into(this)
 }

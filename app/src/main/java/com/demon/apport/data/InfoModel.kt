@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.demon.apport.App
 import com.demon.apport.R
+import com.demon.qfsolution.utils.getMimeTypeByFileName
 
 /**
  * Created by cretin on 2018/1/12.
@@ -15,12 +16,6 @@ class InfoModel {
     var size: String? = null
     var name: String? = null
     var icon: Drawable? = null
-        get() =
-            if (isApk()) field
-            else {
-                ContextCompat.getDrawable(App.appContext, R.mipmap.icon_logo)
-            }
-
 
     constructor() {
 
@@ -31,4 +26,10 @@ class InfoModel {
     }
 
     fun isApk() = type == 1
+
+    override fun toString(): String {
+        return "InfoModel(type=$type, path='$path', version=$version, size=$size, name=$name)"
+    }
+
+
 }
