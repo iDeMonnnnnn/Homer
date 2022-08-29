@@ -28,7 +28,7 @@ import java.io.File
 class ChangePathActivity : BaseActivity<ActivityChangePathBinding>() {
 
 
-    private var changePath = "${Environment.getExternalStorageDirectory().absolutePath}/Download"
+    private var changePath = ""
 
     private val openDocumentTree = registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
         it ?: return@registerForActivityResult
