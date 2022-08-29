@@ -2,14 +2,24 @@
 
 **Android端与网页端在局域网络下进行文件传输的App项目。**
 
-1. 参考[WifiTransfer](https://github.com/MZCretin/WifiTransfer-master) 库实现。
-2. 基于[AndroidAsync](https://github.com/koush/AndroidAsync) 库实现。
-3. 兼容AndroidQ及以上设备。
-4. 兼容适配Android TV设备。
+### 前言
+
+>为什么有这个项目？
+
+之前看了[WifiTransfer](https://github.com/MZCretin/WifiTransfer-master) 这个项目的相关文章，就对这个项目很感兴趣。  
+自己平时在家喜欢下载一些电影，美剧，动漫传到智能电视（Android系统）上，每次都用U盘传，感觉特别麻烦。于是想起了[WifiTransfer](https://github.com/MZCretin/WifiTransfer-master) 项目。  
+但是[WifiTransfer](https://github.com/MZCretin/WifiTransfer-master) 并不符合我的使用场景，比如：限制了只能传输APK，Android TV上不兼容等。  
+作为Android开发者便利用空余时间进行了改造，改造后：
+
+1. 对传输的文件类型没有限制。
+2. 兼容AndroidQ及以上设备。
+3. 兼容适配Android TV设备。
+4. 增加了部分功能，优化了使用体验。  
+
 
 ### 使用
 
-1. 下载安装[app-release.apk](https://github.com/iDeMonnnnnn/Homer/raw/master/app-release.apk)
+1. Android手机或者TV，下载安装[app-release.apk](https://github.com/iDeMonnnnnn/Homer/raw/master/app-release.apk)
 2. 启动点击右上角wifi图标，查看访问地址IP+端口。
 3. 打开手机或PC浏览器,输入访问地址。
 4. 在浏览器中选择文件上传，App中即可看到上传的文件。
@@ -24,6 +34,10 @@
 
 如果你有问题或者建议，请[Issues](https://github.com/iDeMonnnnnn/Homer/issues).
 
+### 致谢
+
+1. [WifiTransfer](https://github.com/MZCretin/WifiTransfer-master)  
+2. [AndroidAsync](https://github.com/koush/AndroidAsync)
 
 ### License
 
