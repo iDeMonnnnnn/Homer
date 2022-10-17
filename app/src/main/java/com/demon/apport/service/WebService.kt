@@ -37,6 +37,8 @@ class WebService : Service() {
             WebHelper.instance.startServer(this)
         } else if (ACTION_STOP_WEB_SERVICE == action) {
             WebHelper.instance.stopService()
+
+            stopSelf()
         }
         return START_STICKY
     }
@@ -91,7 +93,7 @@ class WebService : Service() {
         fun stop(context: Context) {
             val intent = Intent(context, WebService::class.java)
             intent.action = ACTION_STOP_WEB_SERVICE
-            ContextCompat.startForegroundService(context, intent)
+            context.startService(intent)
         }
     }
 }
