@@ -24,7 +24,13 @@ object NotificationUtils {
     @TargetApi(Build.VERSION_CODES.O)
     fun createNotificationByChannel(context: Context): Notification {
         val launchIntentForPackage = context.packageManager.getLaunchIntentForPackage(context.packageName)
-        val pIntent = PendingIntent.getActivity(context, 0, launchIntentForPackage, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pIntent = PendingIntent.getActivity(
+            context, 0, launchIntentForPackage, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+        )
         val mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         // 用户可以看到的通知渠道的名字.
         val name: CharSequence = context.getString(R.string.app_name)
