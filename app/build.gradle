@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk 34
-
+    namespace "com.demon.apport"
     defaultConfig {
         applicationId "com.demon.apport"
         minSdk 21
