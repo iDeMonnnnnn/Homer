@@ -24,6 +24,6 @@ class App : Application() {
 
         val rootDir = MMKV.initialize(this)
         LogUtils.wtf(TAG, "onCreate:  $rootDir")
-        QFHelper.init(this, "fileProvider")
+        QFHelper.init(this)
     }
 }

@@ -297,6 +297,8 @@ class WebHelper private constructor() {
 
         fun write(data: ByteArray) {
             try {
+                val str = String(data)
+                Log.d(TAG, "recievedFile=" + str)
                 fileOutPutStream?.write(data)
             } catch (e: IOException) {
                 e.printStackTrace()

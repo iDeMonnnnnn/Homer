@@ -48,7 +48,7 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.8.2"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation "com.koushikdutta.async:androidasync:2.+"
-    implementation 'com.github.iDeMonnnnnn:QFsolution:1.2.0'
+    implementation 'com.github.iDeMonnnnnn:QFsolution:1.2.5'
     implementation 'com.github.michaellee123:LiveEventBus:1.8.14'
     implementation 'com.guolindev.permissionx:permissionx:1.6.4'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.7.0"
