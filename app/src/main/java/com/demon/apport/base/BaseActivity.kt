@@ -53,7 +53,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
 
     private fun setSystemBarStatus(safeCutout: Boolean = false, navBar: Boolean = false) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         WindowInsetsControllerCompat(window, window.decorView).let { controller ->
             //controller.hide(WindowInsetsCompat.Type.statusBars())
             //controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE

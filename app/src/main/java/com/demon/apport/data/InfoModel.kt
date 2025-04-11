@@ -25,6 +25,8 @@ class InfoModel {
         this.type = type
     }
 
+    fun isTxt() = path.getMimeTypeByFileName() == "text/plain"
+
     fun isApk() = type == 1
 
     override fun toString(): String {

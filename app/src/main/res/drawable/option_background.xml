@@ -2,14 +2,14 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <stroke android:width="3dp" android:color="@color/black" />
+            <stroke android:width="2px" android:color="@color/black" />
             <solid android:color="#f3f3f3" />
         </shape>
     </item>
 
     <item android:state_focused="true">
         <shape>
-            <stroke android:width="3dp" android:color="@color/black" />
+            <stroke android:width="2px" android:color="@color/black" />
             <solid android:color="#f3f3f3" />
         </shape>
     </item>
@@ -17,6 +17,7 @@
 
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
+            <stroke android:width="2px" android:color="@color/white" />
             <solid android:color="@color/white" />
         </shape>
     </item>
@@ -24,6 +25,7 @@
 
     <item>
         <shape android:shape="rectangle">
+            <stroke android:width="2px" android:color="@color/white" />
             <solid android:color="@color/white" />
         </shape>
     </item>

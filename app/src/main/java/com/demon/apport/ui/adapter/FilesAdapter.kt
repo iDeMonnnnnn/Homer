@@ -12,6 +12,8 @@ import com.demon.apport.R
 import com.demon.apport.data.InfoModel
 import com.demon.apport.util.FileUtils
 import com.demon.apport.util.loadImg
+import com.demon.apport.util.toast
+import com.demon.apport.util.visibleOrGone
 import com.demon.qfsolution.utils.getExtensionByFileName
 import com.demon.qfsolution.utils.getMimeTypeByFileName
 import com.demon.qfsolution.utils.isImage
@@ -51,10 +53,26 @@ class FilesAdapter constructor(val mList: MutableList<InfoModel> = mutableListOf
             }
             holder.mTvSize.text = infoModel.size
             holder.mTvPath.text = infoModel.path
+            holder.mCopy.visibleOrGone(infoModel.isTxt())
             if (infoModel.isApk()) {
                 holder.ivIcon.setImageDrawable(infoModel.icon)
             } else {
                 holder.ivIcon.setImageResource(FileUtils.getIconByPath(infoModel.path))
+            }
+            holder.mCopy.setOnClickListener {
+                val content = FileUtils.readText(infoModel.path)
+                if (content.isEmpty()) {
+                    "文本内容为空！".toast()
+                    return@setOnClickListener
+                }
+                try {
+                    FileUtils.copyText(mContext, content)
+                    "Copy success!".toast()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    "Copy failed!".toast()
+                }
+
             }
             holder.mOpen.setOnClickListener {
                 FileUtils.openFileorAPk(mContext, infoModel)
@@ -74,6 +92,7 @@ class FilesAdapter constructor(val mList: MutableList<InfoModel> = mutableListOf
         var mTvName: TextView
         var mTvSize: TextView
         var mOpen: TextView
+        var mCopy: TextView
         var mDelete: TextView
         var mTvPath: TextView
         var ivIcon: ImageView
@@ -82,6 +101,7 @@ class FilesAdapter constructor(val mList: MutableList<InfoModel> = mutableListOf
             mTvName = view.findViewById<View>(R.id.tv_name) as TextView
             mTvSize = view.findViewById<View>(R.id.tv_size) as TextView
             mOpen = view.findViewById<View>(R.id.tv_open) as TextView
+            mCopy = view.findViewById<View>(R.id.tv_copy) as TextView
             mTvPath = view.findViewById<View>(R.id.tv_path) as TextView
             mDelete = view.findViewById<View>(R.id.tv_delete) as TextView
             ivIcon = view.findViewById<View>(R.id.iv_icon) as ImageView

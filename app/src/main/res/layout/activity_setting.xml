@@ -7,7 +7,11 @@
     android:background="#f5f5f5"
     tools:context=".ui.SettingActivity">
 
-    <include layout="@layout/include_toolbar" />
+    <include
+        layout="@layout/include_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/tvPath"
@@ -21,8 +25,8 @@
     <Button
         android:id="@+id/tvDelete"
         style="@style/TextView_Menu"
-        android:text="删除全部文件"
         android:layout_marginTop="0.5dp"
+        android:text="删除全部文件"
         app:drawableStartCompat="@drawable/icon_sdcard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

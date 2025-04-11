@@ -26,6 +26,7 @@ import com.demon.apport.App
 import android.os.Environment
 import android.util.Log
 import com.demon.apport.data.Constants
+import com.demon.apport.util.FileUtils
 import com.demon.apport.util.get
 import com.demon.apport.util.mmkv
 import com.demon.qfsolution.utils.getExternalOrFilesDirPath
@@ -74,30 +75,26 @@ class WebHelper private constructor() {
         server?.get("/files") { request: AsyncHttpServerRequest?, response: AsyncHttpServerResponse ->
             val array = JSONArray()
             if (dir.exists() && dir.isDirectory) {
-                val fileNames = dir.list()
-                if (fileNames != null) {
-                    for (fileName in fileNames) {
-                        val file = File(dir, fileName)
-                        if (file.exists() && file.isFile) {
-                            try {
-                                val jsonObject = JSONObject()
-                                jsonObject.put("name", fileName)
-                                val fileLen = file.length()
-                                val df = DecimalFormat("0.00")
-                                if (fileLen > 1024 * 1024) {
-                                    jsonObject.put("size", df.format((fileLen * 1f / 1024 / 1024).toDouble()) + "MB")
-                                } else if (fileLen > 1024) {
-                                    jsonObject.put("size", df.format((fileLen * 1f / 1024).toDouble()) + "KB")
-                                } else {
-                                    jsonObject.put("size", fileLen.toString() + "B")
-                                }
-                                array.put(jsonObject)
-                            } catch (e: JSONException) {
-                                e.printStackTrace()
-                            }
+                val fileNames = FileUtils.getAllFiles()
+                for (file in fileNames) {
+                    try {
+                        val jsonObject = JSONObject()
+                        jsonObject.put("name", file.name)
+                        val fileLen = file.length()
+                        val df = DecimalFormat("0.00")
+                        if (fileLen > 1024 * 1024) {
+                            jsonObject.put("size", df.format((fileLen * 1f / 1024 / 1024).toDouble()) + "MB")
+                        } else if (fileLen > 1024) {
+                            jsonObject.put("size", df.format((fileLen * 1f / 1024).toDouble()) + "KB")
+                        } else {
+                            jsonObject.put("size", fileLen.toString() + "B")
                         }
+                        array.put(jsonObject)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
                     }
                 }
+
             }
             response.send(array.toString())
         }
@@ -297,8 +294,8 @@ class WebHelper private constructor() {
 
         fun write(data: ByteArray) {
             try {
-                val str = String(data)
-                Log.d(TAG, "recievedFile=" + str)
+//                val str = String(data)
+//                Log.d(TAG, "recievedFile=" + str)
                 fileOutPutStream?.write(data)
             } catch (e: IOException) {
                 e.printStackTrace()

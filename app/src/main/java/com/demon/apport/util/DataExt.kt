@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.viewbinding.ViewBinding
@@ -81,4 +82,8 @@ fun ImageView.loadImg(path: String?) {
         .error(R.mipmap.icon_logo)
         .placeholder(R.mipmap.icon_logo)
         .into(this)
+}
+
+fun View.visibleOrGone(isVisible: Boolean) {
+    this.visibility = if (isVisible) View.VISIBLE else View.GONE
 }

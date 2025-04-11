@@ -2,6 +2,7 @@ package com.demon.apport
 
 import android.app.Application
 import android.content.Context
+import com.base.log.Log
 import com.demon.apport.util.LogUtils
 import com.demon.qfsolution.QFHelper
 import com.tencent.mmkv.MMKV
@@ -23,7 +24,7 @@ class App : Application() {
         appContext = this.applicationContext
 
         val rootDir = MMKV.initialize(this)
-        LogUtils.wtf(TAG, "onCreate:  $rootDir")
+        Log.init(this, BuildConfig.DEBUG)
         QFHelper.init(this)
     }
 }

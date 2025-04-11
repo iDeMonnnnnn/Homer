@@ -38,7 +38,7 @@ class ChangePathActivity : BaseActivity<ActivityChangePathBinding>() {
 
 
     override fun initData() {
-        setToolbar("修改存储路径")
+        setToolbar("存储路径")
 
         val def: String = App.appContext.getExternalOrFilesDirPath(Environment.DIRECTORY_DCIM)
         val nowPath = "当前存储路径：${mmkv.get(Constants.MMKV_STORAGE_PATH, def)}"

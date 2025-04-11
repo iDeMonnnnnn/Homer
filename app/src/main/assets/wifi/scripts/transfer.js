@@ -414,7 +414,7 @@ $(function () {
 		}
 
 		$(document).ajaxError(function (event, request, settings) {
-			//alert(STRINGS.CANNOT_CONNECT_SERVER);
+			alert(STRINGS.CANNOT_CONNECT_SERVER);
 			$('.progress_wrapper, .progress').css({ 'background': '#f00' });
 		});
 	});
@@ -428,7 +428,14 @@ $(function () {
 		if (textInput.length > 0) {
 			//发送完成清空文本内容
 			document.getElementById('textInput').value = '';
-			const file = new File([textInput], getFormattedTime() + '.txt', { type: 'text/plain' });
+			var end = 1
+			if (textInput.length > 10) {
+				end = 10
+			} else {
+				end = textInput.length
+			}
+			var name = textInput.substring(0, end) + "@" + getFormattedTime() + '.txt'
+			const file = new File([textInput], name, { type: 'text/plain' });
 			uploadFiles([file]);
 		} else {
 			alert('要发送的文本内容不能为空！');
@@ -446,7 +453,7 @@ $(function () {
 		const min = String(now.getMinutes()).padStart(2, '0');
 		const ss = String(now.getSeconds()).padStart(2, '0');
 
-		return `${yyyy}-${mm}-${dd}@${hh}${min}${ss}`;
+		return `${yyyy}${mm}${dd}${hh}${min}${ss}`;
 	}
 });
 

@@ -1,5 +1,7 @@
 package com.demon.apport.util
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -64,7 +66,32 @@ object FileUtils {
                 }
             }
         }
+        list.reverse()
         return list
+    }
+
+
+    fun getAllFiles(): MutableList<File> {
+        val list = mutableListOf<File>()
+        val dir = WebHelper.instance.dir
+        Log.i(TAG, "getAllFiles: ${dir.absoluteFile}")
+        if (dir.exists() && dir.isDirectory) {
+            val files = dir.listFiles()?.filter {
+                it.exists() && it.isFile
+            }
+            files?.let {
+                list.addAll(it.toMutableList())
+                list.reverse()
+            }
+        }
+        return list
+    }
+
+    @JvmStatic
+    fun copyText(context: Context, text: CharSequence?) {
+        val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val mClipData = ClipData.newPlainText("Label", text)
+        cm.setPrimaryClip(mClipData)
     }
 
     fun openFileorAPk(mContext: Context, infoModel: InfoModel) {
@@ -135,7 +162,7 @@ object FileUtils {
     }
 
     fun getFileSize(length: Long): String {
-        val df = DecimalFormat("######0.00")
+        val df = DecimalFormat("######0")
         val d1 = 3.23456
         val d2 = 0.0
         val d3 = 2.0
@@ -143,7 +170,9 @@ object FileUtils {
         df.format(d2)
         df.format(d3)
         val l = length / 1000 //KB
-        if (l < 1024) {
+        if (length < 1024) {
+            return df.format(length) + "B"
+        } else if (l < 1024) {
             return df.format(l) + "KB"
         } else if (l < 1024 * 1024f) {
             return df.format((l / 1024f).toDouble()) + "MB"
@@ -164,9 +193,7 @@ object FileUtils {
         //获取手机系统的所有APP包名，然后进行一一比较
         val pinfo = packageManager.getInstalledPackages(0)
         for (i in pinfo.indices) {
-            if ((pinfo[i] as PackageInfo).packageName
-                    .equals(packageName, ignoreCase = true)
-            ) return true
+            if ((pinfo[i] as PackageInfo).packageName.equals(packageName, ignoreCase = true)) return true
         }
         return false
     }
@@ -218,11 +245,11 @@ object FileUtils {
             if (context.packageManager.queryIntentActivities(intent, 0).size > 0) {
                 context.startActivity(intent)
             } else {
-                "没有可以打开此文件的应用!".toast()
+                "当前设备，没有支持访问此文件的程序！".toast()
             }
         }.onFailure {
             it.printStackTrace()
-            "没有可以打开此文件的应用!".toast()
+            "当前设备，没有支持访问此文件的程序！".toast()
         }
     }
 
