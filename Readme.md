@@ -21,7 +21,7 @@
 
 ### 使用
 
-1. Android手机或者TV，下载安装[app-release.apk](https://github.com/iDeMonnnnnn/Homer/raw/master/app/release/app-release.apk)
+1. Android手机或者TV，下载安装[app-release.apk](https://github.com/iDeMonnnnnn/Homer/raw/master/app/release/Homer.apk)
 2. 启动点击右上角wifi图标，查看访问地址IP+端口。
 3. 打开手机或PC浏览器,输入访问地址。
 4. 在浏览器中选择文件上传，App中即可看到上传的文件。
